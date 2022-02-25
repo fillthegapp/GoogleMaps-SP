@@ -40,12 +40,6 @@ function create_xcframework() {
     -framework "$framework_name.framework-iphoneos.xcarchive/Products/Library/Frameworks/$framework_name.framework"\
     -framework "$framework_name.framework-iphonesimulator.xcarchive/Products/Library/Frameworks/$framework_name.framework"\
     -output "$framework_name.xcframework"
-
-  # Compress the XCFramework.
-  zip -r -X "$framework_name.xcframework.zip" "$framework_name.xcframework/"
-
-  # Save the SHA-256 checksum.
-  shasum -a 256 "$framework_name.xcframework.zip" >> checksum
 }
 
 function prepare() {
@@ -59,7 +53,6 @@ function prepare() {
 }
 
 function cleanup() {
-  rm -r *.xcframework
   rm -r *.xcarchive
 }
 
